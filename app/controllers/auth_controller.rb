@@ -15,10 +15,14 @@ class AuthController < ApplicationController
 
     def get_email
         puts params
+        ids = params["auth"]["ids"]
+        puts ids
         if authenticate_user!
-            puts "lolol"
-            puts params
-            render json: {email: User.find_by(id: params["id"]).email}
+            emails = []
+            ids.each do |i|
+                emails.push(User.find_by(id: i).email)
+            end 
+            render json: { emails: emails }
         else
             auth_fail
         end
