@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+login curl
+
+curl -d '{"user": {"email":"test@surrey.ac.uk", "password":"123456"}}' -H "Content-Type: application/json" -X POST localhost:3000/api/login -i

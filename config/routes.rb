@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   end
 
   post 'auth', to: 'auth#access_check'
+  post 'auth/email', to: 'auth#get_email'
 
   devise_for :users,
     defaults: { format: :json },
