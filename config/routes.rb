@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   post 'auth', to: 'auth#access_check'
   post 'auth/email', to: 'auth#get_email'
+  post 'reset_password_token', to: 'auth#password_reset_token'
 
   devise_for :users,
     defaults: { format: :json },
@@ -20,5 +21,7 @@ Rails.application.routes.draw do
       registrations: 'registrations',
     }
 
-
+  devise_scope :user do
+    put 'reset_password', to: 'passwords#update'
+  end
 end

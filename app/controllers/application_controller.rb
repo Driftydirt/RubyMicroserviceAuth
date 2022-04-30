@@ -4,8 +4,6 @@ class ApplicationController < ActionController::API
 
   def render_jsonapi_response(resource)
     if resource.errors.empty?
-      puts "lol"
-      puts resource.email
       render jsonapi: resource
     else
       render jsonapi_errors: resource.errors, status: 400
