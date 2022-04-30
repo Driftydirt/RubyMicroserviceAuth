@@ -15,15 +15,11 @@ class AuthController < ApplicationController
 
     def get_email
         ids = params["auth"]["ids"]
-        if authenticate_user!
-            emails = []
-            ids.each do |i|
-                emails.push(User.find_by(id: i).email)
-            end 
-            render json: { emails: emails }, status: 200
-        else
-            auth_fail
-        end
+        emails = []
+        ids.each do |i|
+            emails.push(User.find_by(id: i).email)
+        
+        render json: { emails: emails }, status: 200
     end
 
     def password_reset_token
