@@ -16,9 +16,13 @@ class AuthController < ApplicationController
     def get_email
         ids = params["auth"]["ids"]
         emails = []
-        ids.each do |i|
-            emails.push(User.find_by(id: i).email)
-        
+        if ids.kind_of?(Array)
+            ids.each do |i|
+                emails.push(User.find_by(id: i).email)
+            end
+        else
+            emails.push(User.find_by(id: ids).email)
+        end
         render json: { emails: emails }, status: 200
     end
 
