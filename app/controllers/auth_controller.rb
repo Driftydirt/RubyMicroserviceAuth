@@ -26,6 +26,20 @@ class AuthController < ApplicationController
         render json: { emails: emails }, status: 200
     end
 
+    def get_ids
+        emails = params["auth"]["emails"]
+        ids = []
+        if emails.kind_of?(Array)
+            emails.each do |e|
+                ids.push(User.find_by(email: e).id)
+            end
+        else
+            ids.push(User.find_by(email: emails).id)
+        end
+        render json: { ids: ids }, status: 200
+
+    end
+
     def password_reset_token
         token, hashed_token = Devise.token_generator.generate(User, :reset_password_token)
         user = User.find_by(email: params["email"])
